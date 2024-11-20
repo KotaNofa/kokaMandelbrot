@@ -11,5 +11,14 @@ int main()
     VideoMode vm(vmWidth, vmHeight);
     RenderWindow gameWindow(vm, "MandelbrotSet!!", Style::Default);
 
+    while (gameWindow.isOpen()) {
+
+        gameWindow.clear(Color::Green);
+
+
+
+        gameWindow.display();
+    }
+
     return 0;
 }
