@@ -9,5 +9,13 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 	m_zoomCount = 0;
 	m_state = State::CALCULATING;
 	
-	VertexArray va;
+	VertexArray va(Points);
+	va.resize(pixelWidth * pixelHeight);
 }
+
+void ComplexPlane::draw(RenderTarget& target, RenderStates states) const
+{
+	target.draw(m_vArray);
+}
+
+// TODO: defining the rest of the member functions
