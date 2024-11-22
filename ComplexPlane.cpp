@@ -11,6 +11,7 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 	
 	VertexArray va(Points);
 	va.resize(pixelWidth * pixelHeight);
+	m_vArray = va;
 }
 
 void ComplexPlane::draw(RenderTarget& target, RenderStates states) const
