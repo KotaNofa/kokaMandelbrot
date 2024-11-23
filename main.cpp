@@ -8,6 +8,8 @@ int main()
     // Initializing vm and render window
     VideoMode vm(VideoMode::getDesktopMode().width / 2, VideoMode::getDesktopMode().height / 2);
     RenderWindow gameWindow(vm, "MandelbrotSet!!", Style::Default);
+
+    // Initialize font and text
     Font bouba;
     if (!bouba.loadFromFile("boubasfont.ttf")) {
         return -1;
@@ -18,7 +20,6 @@ int main()
     startupEcho.setFillColor(Color::Black);
     startupEcho.setCharacterSize(vm.height / 24);
     startupEcho.setPosition(vm.height / 24, vm.height / 24);
-
 
     // Loop while window open
     while (gameWindow.isOpen()) {

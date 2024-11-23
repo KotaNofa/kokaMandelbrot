@@ -99,8 +99,39 @@ size_t ComplexPlane::countIterations(Vector2f coord)
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
-	// TODO: IMPLEMENT THIS MEMBER FUNCTION
-	cout << "iterationsToRGB(): To be implemented..." << endl;
+	if (count == MAX_ITER)
+	{
+		r = 0;
+		g = 0;
+		b = 0;
+	}
+	else if (count < MAX_ITER)
+	{
+		if (count > MAX_ITER * 0.5)
+		{
+			r = 100;
+			g = 20;
+			b = 20;
+		}
+		else if (count > MAX_ITER * 0.25)
+		{
+			r = 200;
+			g = 40;
+			b = 40;
+		}
+		else if (count > MAX_ITER * 0.1275)
+		{
+			r = 255;
+			g = 127;
+			b = 127;
+		}
+		else
+		{
+			r = 255;
+			g = 255;
+			b = 255;
+		}
+	}
 }
 
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)
