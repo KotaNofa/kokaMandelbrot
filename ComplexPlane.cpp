@@ -98,7 +98,10 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)
 {
-	// TODO: IMPLEMENT THIS MEMBER FUNCTION
-	cout << "mapPixelToCoords(): To be implemented..." << endl;
-	return Vector2f(-1.0, -1.0);
+	Vector2f coords(0.0, 0.0);
+
+	coords.x = ((mousePixel.x - 0) / (VideoMode::getDesktopMode().width - 0)) * (m_plane_size.y - m_plane_size.x) + m_plane_size.x;
+	coords.y = ((mousePixel.y - VideoMode::getDesktopMode().height) / (0 - VideoMode::getDesktopMode().height)) * (m_plane_size.y - m_plane_size.x) + m_plane_size.x;
+
+	return coords;
 }
