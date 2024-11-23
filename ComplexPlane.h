@@ -2,6 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <complex>
+#include <vector>
+#include <thread>
+#include <mutex>
 
 using namespace std;
 using namespace sf;
