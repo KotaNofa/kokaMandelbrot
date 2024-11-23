@@ -22,6 +22,8 @@ int main()
 
     Text startupEcho = createStartupText(bouba, gameWindow.getSize());
 
+    Event event;
+
     // Loop while window open
     while (gameWindow.isOpen()) {
 
@@ -29,14 +31,39 @@ int main()
             HANDLE INPUT
         *******************/
 
-        Event event;
         while (gameWindow.pollEvent(event))
         {
             if (event.type == Event::Closed)
             {
                 gameWindow.close();
             }
-            // TODO: rest of the handling input
+            if (event.type == Event::MouseButtonPressed) {
+                if (event.mouseButton.button == Mouse::Left)
+                {
+                    std::cout << "the left button was pressed" << std::endl;
+                    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+                    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+                    plane.zoomIn();
+                    plane.setCenter({ event.mouseButton.x, event.mouseButton.y });
+                }
+                else if (event.mouseButton.button == Mouse::Right)
+                {
+                    std::cout << "the right button was pressed" << std::endl;
+                    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+                    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
+
+                    plane.zoomOut();
+                    plane.setCenter({ event.mouseButton.x, event.mouseButton.y });
+                }
+            }
+            if (event.type == Event::MouseMoved) {
+                plane.setMouseLocation({ event.mouseButton.x, event.mouseButton.y });
+            }
+            if (event.type == Event::KeyPressed) {
+                if (event.key.code == Keyboard::Escape) {
+                    gameWindow.close();
+                }
+            }
         }
 
         /*************
@@ -54,8 +81,6 @@ int main()
         gameWindow.clear(Color::White);
 
         gameWindow.draw(startupEcho);
-
-
 
         gameWindow.display();
     }
