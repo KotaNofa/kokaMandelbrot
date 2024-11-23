@@ -1,4 +1,6 @@
 #include "ComplexPlane.h"
+#include "text.h"
+
 
 using namespace std;
 using namespace sf;
@@ -9,17 +11,16 @@ int main()
     VideoMode vm(VideoMode::getDesktopMode().width / 2, VideoMode::getDesktopMode().height / 2);
     RenderWindow gameWindow(vm, "MandelbrotSet!!", Style::Default);
 
+    // Initialize Complex Plane;
+    ComplexPlane plane(gameWindow.getSize().x, gameWindow.getSize().y);
+
     // Initialize font and text
     Font bouba;
     if (!bouba.loadFromFile("boubasfont.ttf")) {
         return -1;
     }
-    Text startupEcho;
-    startupEcho.setString("Successfully Opened");
-    startupEcho.setFont(bouba);
-    startupEcho.setFillColor(Color::Black);
-    startupEcho.setCharacterSize(vm.height / 24);
-    startupEcho.setPosition(vm.height / 24, vm.height / 24);
+
+    Text startupEcho = createStartupText(bouba, gameWindow.getSize());
 
     // Loop while window open
     while (gameWindow.isOpen()) {
@@ -53,6 +54,8 @@ int main()
         gameWindow.clear(Color::White);
 
         gameWindow.draw(startupEcho);
+
+
 
         gameWindow.display();
     }
