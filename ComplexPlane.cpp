@@ -88,14 +88,44 @@ size_t ComplexPlane::countIterations(Vector2f coord)
 	complex<double> z = c;
 	size_t iters = 0;
 
+	/*
+	* * * * FOR MULTITHREADING LATER
+	* 
+	vector<thread> threads;
+	const int numThreads = 4;
+	*/
+
 	while (abs(z) < 2.0 && iters < MAX_ITER)
 	{
 		z = z * z + c;
+		/*
+		* * * * FOR MULTITHREADING LATER
+		* 
+		for (int i = 0; i < numThreads; ++i)
+		{
+			threads.push_back(thread(incrementIters, iters));
+		}
+		for (auto& t : threads)
+		{
+			t.join();
+		}
+		*/
 		iters++;
 	}
 
 	return iters;
 }
+
+/*
+* * * * FOR MULTITHREADING LATER
+* 
+void incrementIters(size_t& iters)
+{
+	mutex mtx;
+	lock_guard<mutex> lock(mtx);
+	iters++;
+}
+*/
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
