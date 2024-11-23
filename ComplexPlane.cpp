@@ -84,9 +84,16 @@ void ComplexPlane::loadText(Text& text)
 
 size_t ComplexPlane::countIterations(Vector2f coord)
 {
-	size_t iters = -1;
-	// TODO: IMPLEMENT THIS MEMBER FUNCTION
-	cout << "countIterations(): To be implemented..." << endl;
+	complex<double> c(coord.x, coord.y);
+	complex<double> z = c;
+	size_t iters = 0;
+
+	while (abs(z) < 2.0 && iters < MAX_ITER)
+	{
+		z = z * z + c;
+		iters++;
+	}
+
 	return iters;
 }
 
