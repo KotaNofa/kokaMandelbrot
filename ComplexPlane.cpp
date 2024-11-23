@@ -1,6 +1,6 @@
 #include "ComplexPlane.h"
 
-ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
+/*ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 {
 	m_pixel_size = { pixelWidth, pixelHeight };
 	m_aspectRatio = pixelHeight / pixelWidth;
@@ -10,4 +10,4 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 	m_state = State::CALCULATING;
 	
 	VertexArray va;
-}
+}*/
