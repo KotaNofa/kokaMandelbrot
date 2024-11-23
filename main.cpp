@@ -12,12 +12,16 @@ int main()
     if (!bouba.loadFromFile("boubasfont.ttf")) {
         return -1;
     }
+    Text startupEcho;
+    startupEcho.setString("Successfully Opened");
+    startupEcho.setFont(bouba);
+    startupEcho.setFillColor(Color::Black);
+    startupEcho.setCharacterSize(vm.height / 24);
+    startupEcho.setPosition(vm.height / 24, vm.height / 24);
 
 
     // Loop while window open
     while (gameWindow.isOpen()) {
-
-        gameWindow.clear(Color::White);
 
         /*******************
             HANDLE INPUT
@@ -44,6 +48,10 @@ int main()
         ************/
 
         // TODO: rest of the drawing
+
+        gameWindow.clear(Color::White);
+
+        gameWindow.draw(startupEcho);
 
         gameWindow.display();
     }
