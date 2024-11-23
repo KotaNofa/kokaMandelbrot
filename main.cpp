@@ -6,13 +6,18 @@ using namespace sf;
 int main()
 {
     // Initializing vm and render window
-    VideoMode vm(VideoMode::getDesktopMode().width, VideoMode::getDesktopMode().height);
+    VideoMode vm(VideoMode::getDesktopMode().width / 2, VideoMode::getDesktopMode().height / 2);
     RenderWindow gameWindow(vm, "MandelbrotSet!!", Style::Default);
+    Font bouba;
+    if (!bouba.loadFromFile("boubasfont.ttf")) {
+        return -1;
+    }
+
 
     // Loop while window open
     while (gameWindow.isOpen()) {
 
-        gameWindow.clear(Color::Green);
+        gameWindow.clear(Color::White);
 
         /*******************
             HANDLE INPUT
