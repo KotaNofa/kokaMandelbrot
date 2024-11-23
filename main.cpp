@@ -5,12 +5,8 @@ using namespace sf;
 
 int main()
 {
-    // Setting window size
-    unsigned int vmWidth = VideoMode::getDesktopMode().width / 2;
-    unsigned int vmHeight = VideoMode::getDesktopMode().height / 2;
-
     // Initializing vm and render window
-    VideoMode vm(vmWidth, vmHeight);
+    VideoMode vm(VideoMode::getDesktopMode().width, VideoMode::getDesktopMode().height);
     RenderWindow gameWindow(vm, "MandelbrotSet!!", Style::Default);
 
     // Loop while window open
@@ -22,7 +18,15 @@ int main()
             HANDLE INPUT
         *******************/
 
-        // TODO: handling input
+        Event event;
+        while (gameWindow.pollEvent(event))
+        {
+            if (event.type == Event::Closed)
+            {
+                gameWindow.close();
+            }
+            // TODO: rest of the handling input
+        }
 
         /*************
             UPDATE
