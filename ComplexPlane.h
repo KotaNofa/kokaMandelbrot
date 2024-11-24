@@ -9,7 +9,6 @@
 using namespace std;
 using namespace sf;
 
-const unsigned int MAX_ITER = 64;
 const float BASE_WIDTH = 4.0;
 const float BASE_HEIGHT = 4.0;
 const float BASE_ZOOM = 0.5;
@@ -28,6 +27,7 @@ public:
 	void loadText(Text& text);
 	void updateRender();
 private:
+	unsigned int m_max_iter = 32;
 	VertexArray m_vArray;
 	State m_state;
 	Vector2f m_mouseLocation;

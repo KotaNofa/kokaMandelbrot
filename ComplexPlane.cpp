@@ -83,6 +83,7 @@ void ComplexPlane::zoomIn()
 	float y_size = BASE_HEIGHT * m_aspectRatio * (pow(BASE_ZOOM, m_zoomCount));
 	m_plane_size = { x_size, y_size };
 	m_state = State::CALCULATING;
+	m_max_iter *= 1.25;
 }
 
 void ComplexPlane::zoomOut()
@@ -92,6 +93,7 @@ void ComplexPlane::zoomOut()
 	float y_size = BASE_HEIGHT * m_aspectRatio * (pow(BASE_ZOOM, m_zoomCount));
 	m_plane_size = { x_size, y_size };
 	m_state = State::CALCULATING;
+	m_max_iter /= 1.25;
 }
 
 void ComplexPlane::setCenter(Vector2i mousePixel)
@@ -113,8 +115,9 @@ void ComplexPlane::loadText(Text& text)
 	string zoomLevel = "Zoom Level: " + to_string(m_zoomCount) + "\n";
 	string leftClick = "Left-click to Zoom in\n";
 	string rightClick = "Right-click to Zoom out\n";
+	string iterations = "Iterations: " + to_string(m_max_iter);
 
-	text.setString(title + center + cursor + zoomLevel + leftClick + rightClick);
+	text.setString(title + center + cursor + zoomLevel + leftClick + rightClick + iterations);
 }
 
 size_t ComplexPlane::countIterations(Vector2f coord)
@@ -125,7 +128,7 @@ size_t ComplexPlane::countIterations(Vector2f coord)
 
 	double magnitude_squared = 0.0;
 
-	while (magnitude_squared < 4.0 && iters < MAX_ITER)
+	while (magnitude_squared < 4.0 && iters < m_max_iter)
 	{
 		z = z * z + c;
 		magnitude_squared = norm(z);
@@ -137,7 +140,7 @@ size_t ComplexPlane::countIterations(Vector2f coord)
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
-	if (count == MAX_ITER)
+	if (count == m_max_iter)
 	{
 		// Set to black for points inside the Mandelbrot set
 		r = g = b = 0;
@@ -145,7 +148,7 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 	else
 	{
 		// Normalize the iteration count to [0, 1]
-		float t = static_cast<float>(count) / MAX_ITER;
+		float t = static_cast<float>(count) / m_max_iter;
 		// Map the normalized value to grayscale intensity
 		Uint8 intensity = static_cast<Uint8>(255 * t);
 		// Apply the intensity to all color channels
