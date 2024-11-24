@@ -20,7 +20,12 @@ int main()
         return -1;
     }
 
-    Text startupEcho = createStartupText(bouba, gameWindow.getSize());
+    Text startupEcho;
+    startupEcho.setString("Successfully Opened");
+    startupEcho.setFont(bouba);
+    startupEcho.setFillColor(sf::Color::Black);
+    startupEcho.setCharacterSize(gameWindow.getSize().y / 24);
+    startupEcho.setPosition(gameWindow.getSize().y / 24, gameWindow.getSize().y / 24);
 
     Event event;
 
