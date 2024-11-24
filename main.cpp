@@ -22,7 +22,7 @@ int main()
     Text startupEcho;
     startupEcho.setString("Successfully Opened");
     startupEcho.setFont(bouba);
-    startupEcho.setFillColor(sf::Color::Black);
+    startupEcho.setFillColor(sf::Color::White);
     startupEcho.setCharacterSize(gameWindow.getSize().y / 24);
     startupEcho.setPosition(gameWindow.getSize().y / 24, gameWindow.getSize().y / 24);
 
