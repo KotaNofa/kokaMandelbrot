@@ -137,6 +137,9 @@ size_t ComplexPlane::countIterations(Vector2f coord)
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
+	/*
+	* FORMULA FOR GRAYSCALE
+	*/
 	if (count == MAX_ITER)
 	{
 		// Set to black for points inside the Mandelbrot set
@@ -151,6 +154,26 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 		// Apply the intensity to all color channels
 		r = g = b = intensity;
 	}
+
+
+	/*
+	* FORMULA FOR OUR OWN COLOR SCHEME
+	*
+	if (count == MAX_ITER)
+	{
+		// Set to black
+		r = g = b = 0;
+	}
+	else
+	{
+		// Normalize count
+		float t = (float)count / MAX_ITER;
+		// Set color
+		r = (Uint8)(9 * (1 - t) * t * t * t * 255);
+		g = (Uint8)(15 * (1 - t) * (1 - t) * t * t * 255);
+		b = (Uint8)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
+	}
+	*/
 }
 
 
