@@ -8,7 +8,7 @@ int main()
 {
     // Initializing vm and render window
     VideoMode vm(VideoMode::getDesktopMode().width / 2, VideoMode::getDesktopMode().height / 2);
-    RenderWindow gameWindow(vm, "MandelbrotSet!!", Style::Default);
+    RenderWindow gameWindow(vm, "Mandelbrot Set by Armin and Daniel", Style::Default);
 
     // Initialize Complex Plane;
     ComplexPlane plane(gameWindow.getSize().x, gameWindow.getSize().y);
@@ -20,7 +20,7 @@ int main()
     }
 
     Text startupEcho;
-    startupEcho.setString("Successfully Opened");
+    startupEcho.setString("Placeholder");
     startupEcho.setFont(bouba);
     startupEcho.setFillColor(sf::Color::White);
     startupEcho.setCharacterSize(gameWindow.getSize().y / 24);

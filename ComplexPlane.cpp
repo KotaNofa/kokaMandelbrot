@@ -1,4 +1,5 @@
-#include "ComplexPlane.h"
+#include "ComplexPlane.h"'
+#include <thread>
 
 ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 {
@@ -26,21 +27,51 @@ void ComplexPlane::updateRender()
 		// Adjust vertex array size
 		m_vArray.resize(m_pixel_size.x * m_pixel_size.y);
 
+		// Determines thread amount for your computer
+		int thread_count = std::thread::hardware_concurrency();
+
+		// Function to calculate pixel colors for a given row
+		// Using Lambda to split [[[THIS]]] into rows for threads to munch yum yum
+		auto calculateRow = [this](int row)
+			{
+				for (int j = 0; j < m_pixel_size.x; j++)
+				{
+					size_t index = j + row * m_pixel_size.x;
+					m_vArray[index].position = { (float)j, (float)row };
+
+					Vector2f coords = mapPixelToCoords({ j, row });
+					size_t iters = countIterations(coords);
+
+					Uint8 r, g, b;
+					iterationsToRGB(iters, r, g, b);
+					m_vArray[index].color = { r, g, b };
+				}
+			};
+
+		// Create a vector to hold threads
+		std::vector<std::thread> threads;
+
+		// Launch threads for each row
 		for (int i = 0; i < m_pixel_size.y; i++)
 		{
-			for (int j = 0; j < m_pixel_size.x; j++)
+			// Limit thread count to avoid launching too many threads
+			if (threads.size() < thread_count)
 			{
-				size_t index = j + i * m_pixel_size.x;
-				m_vArray[index].position = { (float)j, (float)i };
-
-				Vector2f coords = mapPixelToCoords({ j, i });
-				size_t iters = countIterations(coords);
-
-				Uint8 r, g, b;
-				iterationsToRGB(iters, r, g, b);
-				m_vArray[index].color = { r, g, b };
+				threads.push_back(thread(calculateRow, i));
+			} else {
+				// Wait for a thread to finish before starting another one
+				threads.front().join();
+				threads.erase(threads.begin());
+				threads.push_back(thread(calculateRow, i));
 			}
 		}
+
+		// Join all remaining threads
+		for (auto& t : threads)
+		{
+			t.join();
+		}
+
 		m_state = State::DISPLAYING;
 	}
 }
@@ -76,7 +107,7 @@ void ComplexPlane::setMouseLocation(Vector2i mousePixel)
 
 void ComplexPlane::loadText(Text& text)
 {
-	string title = "Mandelbrot Set\n";
+	string title = "Mandelbrot Set by Armin & Daniel\n";
 	string center = "Center: (" + to_string(m_plane_center.x) + ", " + to_string(m_plane_center.y) + ")\n";
 	string cursor = "Cursor: (" + to_string(m_mouseLocation.x) + ", " + to_string(m_mouseLocation.y) + ")\n";
 	string zoomLevel = "Zoom Level: " + to_string(m_zoomCount) + "\n";
