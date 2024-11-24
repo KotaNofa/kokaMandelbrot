@@ -77,15 +77,17 @@ int main()
             UPDATE
         *************/
 
-        // TODO: update loop
+        plane.updateRender();
+
+        plane.loadText(startupEcho);
 
         /************
             DRAW
         ************/
 
-        // TODO: rest of the drawing
-
         gameWindow.clear(Color::White);
+
+        plane.draw(gameWindow, RenderStates::Default);
 
         gameWindow.draw(startupEcho);
 
