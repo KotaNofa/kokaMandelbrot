@@ -1,5 +1,4 @@
 #include "ComplexPlane.h"
-#include "text.h"
 
 
 using namespace std;
@@ -62,7 +61,10 @@ int main()
                 }
             }
             if (event.type == Event::MouseMoved) {
-                plane.setMouseLocation({ event.mouseButton.x, event.mouseButton.y });
+                plane.setMouseLocation({ event.mouseMove.x, event.mouseMove.y });
+                std::cout << event.mouseMove.x << " ";
+                std::cout << event.mouseMove.y << endl;
+                
             }
             if (event.type == Event::KeyPressed) {
                 if (event.key.code == Keyboard::Escape) {
