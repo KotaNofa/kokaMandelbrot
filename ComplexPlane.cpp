@@ -168,8 +168,8 @@ Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)
 {
 	Vector2f coords(0.0, 0.0);
 
-	coords.x = ((mousePixel.x - 0) / (VideoMode::getDesktopMode().width - 0)) * (m_plane_size.y - m_plane_size.x) + m_plane_size.x;
-	coords.y = ((mousePixel.y - VideoMode::getDesktopMode().height) / (0 - VideoMode::getDesktopMode().height)) * (m_plane_size.y - m_plane_size.x) + m_plane_size.x;
-	
+	coords.x = ((float)mousePixel.x / m_pixel_size.x) * m_plane_size.x - m_plane_size.x / 2;
+	coords.y = ((float)mousePixel.y / m_pixel_size.y) * m_plane_size.y - m_plane_size.y / 2;
+
 	return coords;
 }
