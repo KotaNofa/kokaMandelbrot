@@ -159,7 +159,7 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 	/*
 	* FORMULA FOR OUR OWN COLOR SCHEME
 	*
-	if (count == MAX_ITER)
+	if (count == m_max_iter)
 	{
 		// Set to black
 		r = g = b = 0;
@@ -167,7 +167,7 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 	else
 	{
 		// Normalize count
-		float t = (float)count / MAX_ITER;
+		float t = (float)count / m_max_iter;
 		// Set color
 		r = (Uint8)(9 * (1 - t) * t * t * t * 255);
 		g = (Uint8)(15 * (1 - t) * (1 - t) * t * t * 255);
