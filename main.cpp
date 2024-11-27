@@ -26,8 +26,6 @@ int main()
     startupEcho.setCharacterSize(gameWindow.getSize().y / 24);
     startupEcho.setPosition(gameWindow.getSize().y / 24, gameWindow.getSize().y / 24);
 
-    Event event;
-
     // Loop while window open
     while (gameWindow.isOpen()) {
 
@@ -35,6 +33,7 @@ int main()
             HANDLE INPUT
         *******************/
 
+        Event event;
         while (gameWindow.pollEvent(event))
         {
             if (event.type == Event::Closed)
@@ -47,8 +46,9 @@ int main()
                     std::cout << "the left button was pressed" << std::endl;
                     std::cout << "mouse x: " << event.mouseButton.x << std::endl;
                     std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-                    plane.zoomIn();
+
                     plane.setCenter({ event.mouseButton.x, event.mouseButton.y });
+                    plane.zoomIn();
                 }
                 else if (event.mouseButton.button == Mouse::Right)
                 {
@@ -56,8 +56,8 @@ int main()
                     std::cout << "mouse x: " << event.mouseButton.x << std::endl;
                     std::cout << "mouse y: " << event.mouseButton.y << std::endl;
 
-                    plane.zoomOut();
                     plane.setCenter({ event.mouseButton.x, event.mouseButton.y });
+                    plane.zoomOut();
                 }
             }
             if (event.type == Event::MouseMoved) {
