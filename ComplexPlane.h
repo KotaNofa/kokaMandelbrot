@@ -27,7 +27,7 @@ public:
 	void loadText(Text& text);
 	void updateRender();
 private:
-	unsigned int m_max_iter = 32;
+	unsigned int m_max_iter = 256;
 	VertexArray m_vArray;
 	State m_state;
 	Vector2f m_mouseLocation;

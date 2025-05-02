@@ -83,7 +83,7 @@ void ComplexPlane::zoomIn()
 	float y_size = BASE_HEIGHT * m_aspectRatio * (pow(BASE_ZOOM, m_zoomCount));
 	m_plane_size = { x_size, y_size };
 	m_state = State::CALCULATING;
-	m_max_iter *= 1.25;
+	m_max_iter *= 1.1;
 }
 
 void ComplexPlane::zoomOut()
@@ -93,7 +93,7 @@ void ComplexPlane::zoomOut()
 	float y_size = BASE_HEIGHT * m_aspectRatio * (pow(BASE_ZOOM, m_zoomCount));
 	m_plane_size = { x_size, y_size };
 	m_state = State::CALCULATING;
-	m_max_iter /= 1.25;
+	m_max_iter /= 1.1;
 }
 
 void ComplexPlane::setCenter(Vector2i mousePixel)

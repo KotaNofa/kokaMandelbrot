@@ -19,11 +19,14 @@ int main()
         return -1;
     }
 
+    int* num = new int;
+    delete num;
+
     Text startupEcho;
     startupEcho.setString("Placeholder");
     startupEcho.setFont(bouba);
     startupEcho.setFillColor(sf::Color::White);
-    startupEcho.setCharacterSize(gameWindow.getSize().y / 24);
+    startupEcho.setCharacterSize(gameWindow.getSize().y / 48);
     startupEcho.setPosition(gameWindow.getSize().y / 24, gameWindow.getSize().y / 24);
 
     // Loop while window open
