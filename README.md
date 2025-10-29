@@ -1,1 +1,1 @@
-Mandelbrot Set with koka :)
+<img src="https://cdn.boubas.net/github/mandelbrot.png">
